@@ -21,7 +21,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 // Email settings
-$to = "shakilcoding@gmail.com"; 
+$to = "dudubuzaglo@gmail.com"; 
 $subject = "טופס התקשרות חדש";
 
 $message = "
