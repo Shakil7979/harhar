@@ -34,7 +34,7 @@ $message = "
 $headers  = "From: $full_name <$email>\r\n";
 $headers .= "Reply-To: $email\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8";
-$headers .= "From: contact@2pservices.io"."\r\n" ;
+$headers .= "From: finance@refresh-market.co.il"."\r\n" ;
 
 if (mail($to, $subject, $message, $headers)) {
     echo 'success';
