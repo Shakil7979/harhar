@@ -205,6 +205,22 @@
     .footer { 
         text-align: center;
     }
+    .full_width_header_banner_area {
+        padding-top: 115px;
+    }
+    .nav_area li{
+        flex: 0 0 50%;
+    }
+    .nav_icon { 
+        max-width: 20px; 
+    }
+    .nav_area li a span { 
+        margin-left: 0;
+        font-size: 11px;
+    }
+    .footer { 
+        padding-bottom: 68px;
+    }
 }
 @media (max-width: 480px) {
    .banner_content h3 { 

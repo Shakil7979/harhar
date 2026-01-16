@@ -116,12 +116,7 @@ h6 {
     left: 0;
     z-index: 9999;
 	padding: 15px 0;
-}
-
-.sk-header-area.fixed {
-    background: #fff;
-}
-
+} 
 
 .logo {
     width: 100%;
@@ -461,4 +456,13 @@ h6 {
 }
 .hide_destop{
 	display: none;
+}
+
+.footer-social {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	background: #ffffff96;
+	width: 100%;
+	padding: 10px;
 }
