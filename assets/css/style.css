@@ -27,13 +27,17 @@
     box-sizing: border-box;
 }
 
+html{
+	overflow-x: hidden;
+}
+
 body {
     font-family: 'Heebo', sans-serif;
     color: var(--dark-color);
     background-color: var(--secondary-color);
     line-height: 1.6;
     text-align: right;
-    overflow-x: hidden;
+    overflow-x: hidden; 
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -95,14 +99,33 @@ h6 {
 .section_bg_pattern_long{
 	background: url(../images/patternBgLong.png) no-repeat center center/cover;
 }
+
+
 /* header and banner area */
 .full_width_header_banner_area{
-    padding-top: 25px;
+    padding-top: 166px;  
 }
+
+.sk-header-area {
+    position: relative;
+    width: 100%;
+    transition: all 0.3s ease;
+	background: transparent;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+	padding: 15px 0;
+}
+
+.sk-header-area.fixed {
+    background: #fff;
+}
+
 
 .logo {
     width: 100%;
-	max-width: 150px;
+	max-width: 100px;
 	margin-right: auto;
 }
 
