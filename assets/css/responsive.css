@@ -210,11 +210,11 @@
    .banner_content h3 { 
         display: inline-block;
     }
-    .logo { 
-        max-width: 64px; 
+    .logo {
+        max-width: 70px;
         text-align: center;
         margin: auto;
-        margin-bottom: 25px;
+        margin-bottom: 0;
     }
     .nav_area li a { 
         font-size: 12px !important;
