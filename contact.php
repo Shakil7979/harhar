@@ -1,43 +1,62 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// PHPMailer include
+require __DIR__ . '/phpmailer/PHPMailer.php';
+require __DIR__ . '/phpmailer/SMTP.php';
+require __DIR__ . '/phpmailer/Exception.php';
+
+// Only POST allowed
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(403);
     exit;
 }
 
+// Receive data
 $full_name = trim($_POST['full_name'] ?? '');
 $email     = trim($_POST['email'] ?? '');
 $phone     = trim($_POST['phone'] ?? '');
-$consent   = isset($_POST['consent']) && $_POST['consent'] == 1 ? 'כן' : 'לא';
+$consent   = !empty($_POST['consent']) ? 'כן' : 'לא';
 
-// Validation (server-side)
-if ($full_name === '' || $email === '' || $phone === '') {
+// Validation
+if ($full_name === '' || $email === '' || $phone === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo 'error';
     exit;
 }
 
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo 'error';
-    exit;
-}
+$mail = new PHPMailer(true);
 
-// Email settings
-$to = "dudubuzaglo@gmail.com"; 
-$subject = "טופס התקשרות חדש";
+try {
+    // 🔹 SMTP CONFIG (CLIENT SERVER FRIENDLY)
+    $mail->isSMTP();
+    $mail->Host       = 'smtp.gmail.com';          // or client SMTP
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'finance@refresh-market.co.il'; // SMTP email
+    $mail->Password   = 'SMTP_PASSWORD_HERE';      // SMTP / App Password
+    $mail->SMTPSecure = 'tls';
+    $mail->Port       = 587;
 
-$message = "
-שם מלא: $full_name
-אימייל: $email
-טלפון: $phone
-אישור דיוור: $consent
-";
+    $mail->CharSet = 'UTF-8';
 
-$headers  = "From: $full_name <$email>\r\n";
-$headers .= "Reply-To: $email\r\n";
-$headers .= "Content-Type: text/plain; charset=UTF-8";
-$headers .= "From: finance@refresh-market.co.il"."\r\n" ;
+    // 🔹 From / To
+    $mail->setFrom('finance@refresh-market.co.il', 'Website Contact');
+    $mail->addAddress('dudubuzaglo@gmail.com'); 
 
-if (mail($to, $subject, $message, $headers)) {
+    // 🔹 Content
+    $mail->Subject = 'טופס התקשרות חדש';
+    $mail->Body =
+        "שם מלא: $full_name\n" .
+        "אימייל: $email\n" .
+        "טלפון: $phone\n" .
+        "אישור דיוור: $consent";
+
+    $mail->send();
     echo 'success';
-} else {
+
+} catch (Exception $e) {
     echo 'error';
 }
